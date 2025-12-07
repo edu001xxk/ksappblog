@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的个人主页</title>
+    <style>
+        /* --- 变量定义 --- */
+        :root {
+            --primary: #2563eb; 
+            --dark: #1f2937;
+            --light: #f3f4f6;
+            --white: #ffffff;
+            --gray: #6b7280;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        /* --- 全局重置 --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
+        ul { list-style: none; }
+        img { display: block; width: 100%; height: auto; }
+
+        /* --- 容器 --- */
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+        /* --- 导航栏 --- */
+        header { background: var(--white); box-shadow: var(--shadow); position: sticky; top: 0; z-index: 50; }
+        nav { display: flex; justify-content: space-between; align-items: center; height: 70px; }
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); letter-spacing: -1px; }
+        .nav-links { display: flex; gap: 25px; }
+        .nav-links a { font-weight: 500; color: var(--gray); }
+        .nav-links a:hover { color: var(--primary); }
+
+        /* --- Hero 区域 --- */
+        .hero { text-align: center; padding: 100px 0 80px; }
+        .hero h1 { font-size: 3rem; margin-bottom: 15px; color: var(--dark); line-height: 1.2; }
+        .hero p { color: var(--gray); font-size: 1.2rem; max-width: 600px; margin: 0 auto 30px; }
+        .btn { display: inline-block; background: var(--primary); color: var(--white); padding: 12px 30px; border-radius: 50px; font-weight: 600; box-shadow: 0 4px 14px 0 rgba(37, 99, 235, 0.39); }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37, 99, 235, 0.23); }
+
+        /* --- 文章列表 --- */
+        .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; border-bottom: 2px solid #e5e7eb; padding-bottom: 15px; }
+        .section-title { font-size: 1.8rem; font-weight: 700; }
+        
+        .post-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; padding-bottom: 80px; }
+        
+        .post-card {
+            background: var(--white); border-radius: 12px; overflow: hidden;
+            box-shadow: var(--shadow); transition: all 0.3s ease; border: 1px solid rgba(0,0,0,0.05);
+        }
+        .post-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
+        
+        .post-image-box { height: 200px; overflow: hidden; position: relative; }
+        .post-image-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .post-card:hover .post-image-box img { transform: scale(1.05); }
+
+        .post-content { padding: 25px; }
+        .tag { display: inline-block; background: #e0e7ff; color: var(--primary); font-size: 0.75rem; padding: 4px 10px; border-radius: 4px; font-weight: 600; margin-bottom: 10px; }
+        .post-title { font-size: 1.4rem; margin-bottom: 10px; font-weight: 700; line-height: 1.4; }
+        .post-excerpt { color: var(--gray); font-size: 0.95rem; margin-bottom: 20px; line-height: 1.6; }
+        .post-meta { display: flex; justify-content: space-between; align-items: center; color: #9ca3af; font-size: 0.85rem; border-top: 1px solid #f3f4f6; padding-top: 15px; }
+
+        /* --- 页脚 --- */
+        footer { background: var(--dark); color: #d1d5db; padding: 60px 0; margin-top: auto; }
+        .footer-content { text-align: center; }
+        .social-links { margin-bottom: 20px; }
+        .social-links a { margin: 0 10px; font-size: 1.5rem; }
+        .social-links a:hover { color: var(--white); }
+
+        /* --- 移动端 --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .nav-links { display: none; /* 移动端简化：隐藏菜单 */ }
+            .post-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Dev.Log</a>
+                <ul class="nav-links">
+                    <li><a href="#">首页</a></li>
+                    <li><a href="#">归档</a></li>
+                    <li><a href="#">关于</a></li>
+                    <li><a href="https://github.com" target="_blank">GitHub</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <h1>记录技术，<br>分享生活。</h1>
+            <p>你好，我是 Alex。这里是我整理技术笔记和思考的地方。</p>
+            <a href="#posts" class="btn">开始阅读</a>
+        </section>
+
+        <section id="posts">
+            <div class="section-header">
+                <h2 class="section-title">最新发布</h2>
+            </div>
+            
+            <div class="post-grid">
+                <article class="post-card">
+                    <a href="#">
+                        <div class="post-image-box">
+                            <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&auto=format&fit=crop&q=60" alt="Coding">
+                        </div>
+                        <div class="post-content">
+                            <span class="tag">编程</span>
+                            <h3 class="post-title">如何优雅地部署静态网站</h3>
+                            <p class="post-excerpt">无需服务器，零成本。本文介绍如何使用 GitHub Pages 和 Vercel 快速上线你的个人主页。</p>
+                            <div class="post-meta">
+                                <span>2025-10-02</span>
+                                <span>阅读 5 min</span>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+
+                <article class="post-card">
+                    <a href="#">
+                        <div class="post-image-box">
+                            <img src="https://images.unsplash.com/photo-1555099962-4199c345e5dd?w=800&auto=format&fit=crop&q=60" alt="AI">
+                        </div>
+                        <div class="post-content">
+                            <span class="tag">AI 工具</span>
+                            <h3 class="post-title">2025 年开发者必备的 AI 助手</h3>
+                            <p class="post-excerpt">从代码补全到自动化测试，这几款 AI 工具彻底改变了我的工作流。</p>
+                            <div class="post-meta">
+                                <span>2025-11-20</span>
+                                <span>阅读 8 min</span>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+
+                <article class="post-card">
+                    <a href="#">
+                        <div class="post-image-box">
+                            <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=800&auto=format&fit=crop&q=60" alt="Life">
+                        </div>
+                        <div class="post-content">
+                            <span class="tag">随笔</span>
+                            <h3 class="post-title">技术人的断舍离</h3>
+                            <p class="post-excerpt">不仅是物理空间的整理，更是对数字资产和信息流的精简。</p>
+                            <div class="post-meta">
+                                <span>2025-12-05</span>
+                                <span>阅读 3 min</span>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="social-links">
+                <a href="#">🐦</a>
+                <a href="#">💻</a>
+                <a href="#">📧</a>
+            </div>
+            <p>&copy; 2025 Dev.Log | Built with ❤️ and Code</p>
+        </div>
+    </footer>
+
+</body>
+</html>
